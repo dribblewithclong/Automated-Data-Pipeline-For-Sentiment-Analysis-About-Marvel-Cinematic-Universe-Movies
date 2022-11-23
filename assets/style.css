@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@700&family=Space+Mono&display=swap');
+
+body {
+    font-family: 'Space Mono', sans-serif;
+}
+
+h1 {
+    text-align:center;
+}
+
+.container-under {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+}
+
+.container-under-left {
+    margin-left: 80px;
+}
+
+.container-under-right {
+    margin-right: 80px;
+}
+
+.container-above {
+    text-align: center;
+}
