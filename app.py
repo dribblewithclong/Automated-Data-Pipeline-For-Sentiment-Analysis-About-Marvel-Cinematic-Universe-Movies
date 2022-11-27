@@ -16,7 +16,9 @@ try:
     df = pd.read_sql_query("SELECT * from marvel_movies_reddit_sentiment", conn)
 except:
     df = pd.read_csv('marvel_movies_reddit_sentiment.csv',sep='|')
-recommendation = pd.read_csv('movies_recommendation.csv',sep='|').set_index('Unnamed: 0')
+recommendation = pd.read_csv('movies_recommendation.csv',sep='|')
+recommendation.columns = ['index'] + [i for i in recommendation.columns[1:]]
+recommendation.set_index('index',inplace=True)
 
 #App name
 app = dash.Dash(__name__)
