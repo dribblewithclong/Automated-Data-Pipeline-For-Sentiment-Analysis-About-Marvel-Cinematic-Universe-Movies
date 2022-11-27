@@ -104,33 +104,33 @@ app.layout = html.Div(
 )
 
 #---------------------------------------------------------------
-# @app.callback(
-#     Output(component_id='movie-graph', component_property='figure'),
-#     Input(component_id='movie-dropdown', component_property='value')
-# )
+@app.callback(
+    Output(component_id='movie-graph', component_property='figure'),
+    Input(component_id='movie-dropdown', component_property='value')
+)
 
-# def sentiment_analysis_plot(movie):
-#     df_movie = df[df['movie']==movie]
-#     sentiment_count = df_movie['sentiment'].value_counts().reset_index().rename(columns={'sentiment':'proportion','index':'sentiment'})
-#     from_time = df_movie['datetime'].apply(lambda x:str(x).split()[0]).min()
-#     to_time = df_movie['datetime'].apply(lambda x:str(x).split()[0]).max()
-#     total_amount = sentiment_count['proportion'].sum()
-#     piechart = px.pie(
-#         data_frame = sentiment_count,
-#         values = 'proportion',
-#         names = 'sentiment',
-#         hole = .44,
-#         title = f'Overview {total_amount} reddit posts between {from_time} and {to_time}'
-#     )
-#     piechart.update_layout(
-#         autosize = False,
-#         width = 660,
-#         height = 440,
-#         title_font_family = 'Space Mono',
-#         font_family = 'Space Mono'
-#     )
+def sentiment_analysis_plot(movie):
+    df_movie = df[df['movie']==movie]
+    sentiment_count = df_movie['sentiment'].value_counts().reset_index().rename(columns={'sentiment':'proportion','index':'sentiment'})
+    from_time = df_movie['datetime'].apply(lambda x:str(x).split()[0]).min()
+    to_time = df_movie['datetime'].apply(lambda x:str(x).split()[0]).max()
+    total_amount = sentiment_count['proportion'].sum()
+    piechart = px.pie(
+        data_frame = sentiment_count,
+        values = 'proportion',
+        names = 'sentiment',
+        hole = .44,
+        title = f'Overview {total_amount} reddit posts between {from_time} and {to_time}'
+    )
+    piechart.update_layout(
+        autosize = False,
+        width = 660,
+        height = 440,
+        title_font_family = 'Space Mono',
+        font_family = 'Space Mono'
+    )
     
-#     return piechart
+    return piechart
 
 @app.callback(
     Output(component_id='movie-table', component_property='children'),
@@ -138,18 +138,16 @@ app.layout = html.Div(
 )
 
 def movies_recommendation(movie):
-    print(df)
-    return dt.DataTable(data=df.to_dict('records')) #########
-#     name_mapping = {}
-#     primary_name = (pd.Series(recommendation.columns)).sort_values().to_list()
-#     lower_name = df['movie'].drop_duplicates().sort_values().to_list()
-#     for i in range(len(primary_name)):
-#         name_mapping[lower_name[i]] = primary_name[i]
+    name_mapping = {}
+    primary_name = (pd.Series(recommendation.columns)).sort_values().to_list()
+    lower_name = df['movie'].drop_duplicates().sort_values().to_list()
+    for i in range(len(primary_name)):
+        name_mapping[lower_name[i]] = primary_name[i]
 
-#     movies_recomm = recommendation[name_mapping[movie]].sort_values(ascending=False).head(10).reset_index().drop(name_mapping[movie],axis=1)
-#     movies_recomm.columns = ['']
+    movies_recomm = recommendation[name_mapping[movie]].sort_values(ascending=False).head(10).reset_index().drop(name_mapping[movie],axis=1)
+    movies_recomm.columns = ['']
 
-#     return dt.DataTable(data=movies_recomm.to_dict('records'),columns=[{"name": i, "id": i,} for i in (movies_recomm.columns)])
+    return dt.DataTable(data=movies_recomm.to_dict('records'),columns=[{"name": i, "id": i,} for i in (movies_recomm.columns)])
 
 if __name__ == '__main__':
     app.run_server(debug=True)
