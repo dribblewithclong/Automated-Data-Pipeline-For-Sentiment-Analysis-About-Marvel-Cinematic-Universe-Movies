@@ -57,7 +57,6 @@ sqlparse==0.4.3
 text-unidecode==1.3
 textblob==0.17.1
 tqdm==4.64.1
-ufw==0.36
 urllib3==1.26.12
 vaderSentiment==3.3.2
 webdriver-manager==3.8.5
