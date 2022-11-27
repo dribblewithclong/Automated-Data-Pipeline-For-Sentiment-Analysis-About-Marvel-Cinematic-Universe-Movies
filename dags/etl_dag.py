@@ -175,9 +175,11 @@ def text_preprocessing(df):
 def sentiment_analysis(df):
     #Text processing
     df = text_preprocessing(df)
+    #Remove posts with content that have more than 3000 words
+    df = df[df['content'].apply(lambda x:len(x.split())) <= 3000].reset_index(drop=True)
     #Do sentiment analysis for each content
     analyzer = SentimentIntensityAnalyzer()
-    sentiments_df = pd.DataFrame(df['title'].apply(lambda x:analyzer.polarity_scores(x)).tolist())
+    sentiments_df = pd.DataFrame(df['content'].apply(lambda x:analyzer.polarity_scores(x)).tolist())
     #Merge two dataframes
     final_df = pd.merge(df,sentiments_df,left_index=True,right_index=True)[['id','movie','content','datetime','compound','neg','neu','pos']]
     final_df['sentiment'] = 'neutral'
