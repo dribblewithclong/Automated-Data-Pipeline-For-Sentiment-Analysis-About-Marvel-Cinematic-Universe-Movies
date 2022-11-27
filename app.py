@@ -11,7 +11,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 
 #Load dataset from database
-conn = sqlite3.connect("imdb_movies.sqlite")
+conn = sqlite3.connect("/imdb_movies.sqlite")
 df = pd.read_sql_query("SELECT * from marvel_movies_reddit_sentiment", conn)
 recommendation = pd.read_csv('movies_recommendation.csv',sep='|').set_index('Unnamed: 0')
 
