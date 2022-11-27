@@ -22,6 +22,7 @@ recommendation.set_index('index',inplace=True)
 
 #App name
 app = dash.Dash(__name__)
+server = app.server
 
 #App layout
 app.layout = html.Div(
