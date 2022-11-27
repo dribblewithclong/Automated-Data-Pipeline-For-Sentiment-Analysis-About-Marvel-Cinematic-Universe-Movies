@@ -15,8 +15,8 @@ try:
     conn = sqlite3.connect("imdb_movies.sqlite")
     df = pd.read_sql_query("SELECT * from marvel_movies_reddit_sentiment", conn)
 except:
-    df = pd.read_csv('marvel_movies_reddit_sentiment.csv?raw=true',sep='|')
-recommendation = pd.read_csv('movies_recommendation.csv?raw=true',sep='|')
+    df = pd.read_csv('https://media.githubusercontent.com/media/dribblewithclong/Automated-Data-Pipeline-For-Sentiment-Analysis-About-Marvel-Cinematic-Universe-Movies/main/marvel_movies_reddit_sentiment.csv',sep='|')
+recommendation = pd.read_csv('https://media.githubusercontent.com/media/dribblewithclong/Automated-Data-Pipeline-For-Sentiment-Analysis-About-Marvel-Cinematic-Universe-Movies/main/movies_recommendation.csv',sep='|')
 recommendation.columns = ['index'] + [i for i in recommendation.columns[1:]]
 recommendation.set_index('index',inplace=True)
 
