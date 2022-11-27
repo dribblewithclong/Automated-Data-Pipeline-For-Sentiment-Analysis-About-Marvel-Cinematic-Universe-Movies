@@ -138,6 +138,7 @@ app.layout = html.Div(
 )
 
 def movies_recommendation(movie):
+    print(df)
     return dt.DataTable(data=df.to_dict('records')) #########
 #     name_mapping = {}
 #     primary_name = (pd.Series(recommendation.columns)).sort_values().to_list()
